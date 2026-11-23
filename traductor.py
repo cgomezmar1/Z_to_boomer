@@ -3,6 +3,7 @@
 from diccionario import JERGA_GENZ
 
 
+    
 def traducir_a_boomer(frase: str) -> str:
     """Traduce una frase con términos Gen Z a lenguaje estándar.
 
@@ -16,8 +17,24 @@ def traducir_a_boomer(frase: str) -> str:
     resultado: list[str] = []
 
     for palabra in palabras:
-        if palabra in JERGA_GENZ:
-            resultado.append(JERGA_GENZ[palabra])
+        # signos puntuacion:
+        nueva_palabra = ""
+        for letter in palabra:
+            if letter.isalpha():
+                nueva_palabra.append(letter)
+            else:
+                symbol = letter
+        nueva_palabra = "".join(nueva_palabra)
+        palabra = nueva_palabra
+        #Inicio frase
+        cap = False
+        if palabra[0].isupper():
+            cap = True
+        if palabra.lower() in JERGA_GENZ:
+            res = JERGA_GENZ[palabra]
+            if cap:
+                res = res[0].upper() + res[1:]
+            resultado.append(res + symbol)
         else:
             resultado.append(palabra)
 
